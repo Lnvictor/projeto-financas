@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Scorp</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+		
+		
+		<link th:href="@{styles.css}" rel="stylesheet"/>
+	</head>
+	
+	<body>
+		<header class="nav-section">
+			<nav class="my-nav">
+				<ul th:each="menu: ${menus}" class="nav-list">
+					<li class="nav-item white oswald-txt" th:text="${menu.getDescription()}"></li>
+				</ul>
+			</nav>
+		</header>
+		
+		<section class="sidenav">
+			<nav class="my-sidenav">
+				<ul class="sidenav-list" th:each="sub: ${submenus}">
+					<li class="sidenav-item pink oswald-txt" th:text="${sub.getDescription()}"></li>
+				</ul>
+			</nav>
+		</section>
+		
+		<div class="container">
+			<div class="date-picker-container">
+				<h2 class="pink oswald-txt medium-font"> SELECIONE O PERIODO DESEJADO</h2>
+				<br>
+				<select name="date-picker" id="date-picker" class="oswald-txt">
+				<option value="volvo">Volvo</option>
+				<option value="saab">Saab</option>
+				<option value="mercedes">Mercedes</option>
+				<option value="audi">Audi</option>
+				</select>
+			</div>
+			
+			<div class="main-content">
+			</div>
+		</div>
+	</body>
+</html>
