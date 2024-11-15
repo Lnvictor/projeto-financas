@@ -1,0 +1,53 @@
+<header class="nav-section">
+	<nav class="my-nav">
+		<ul th:each="menu: ${menus}" class="nav-list">
+			<li class="nav-item white oswald-txt" th:text="${menu.getDescription()}"></li>
+		</ul>
+	</nav>
+</header>
+
+<section class="sidenav">
+	<nav class="my-sidenav">
+		<ul class="sidenav-list" th:each="sub: ${submenus}">
+			<li class="sidenav-item pink oswald-txt">
+				<a th:text="${sub.getDescription()}" th:href="${sub.getLink()}"> </a>
+			</li>
+		</ul>
+	</nav>
+</section>
+
+<div class="container" th:fragment="container">
+	<div th:replace="~{common :: div.date-picker-container}"></div>			
+	<div th:replace="~{common :: fatura}"></div>
+</div>
+
+<div class="date-picker-container">
+	<h2 class="pink oswald-txt medium-font"> SELECIONE O PERIODO DESEJADO</h2>
+	<br>
+	<select name="date-picker" id="date-picker" class="oswald-txt" th:each="p: ${periodos}">
+		<option th:value="${p.getStartsAt()}" th:text="${p.getStartsAt()}"></option>
+	</select>
+</div>
+
+<div class="main-content" th:fragment="fatura">
+</div>
+
+
+<div class="container" th:fragment="periodoForm">			
+	<div th:replace="~{common :: perFrm}"></div>
+</div>
+
+<div class="main-content perFrm" th:fragment="perFrm"> 
+	<form>
+		<label for="inicio">Data de inicio</label>
+		<input id="inicio" name="inicio" type="text">
+		
+		<label for="fim">Data de Fim</label>
+		<input id="fim" name="fim" type="text">
+		
+		<label for="vencimento">Data de Vencimento</label>
+		<input id="vencimento" name="vencimento" type="text">
+		
+		<button type="submit"> Cadastrar </button>
+	</form>
+</div>

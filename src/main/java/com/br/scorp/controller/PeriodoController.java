@@ -14,21 +14,18 @@ import com.br.scorp.entity.Periodo;
 import com.br.scorp.service.MenuService;
 import com.br.scorp.service.PeriodoService;
 
-import lombok.AllArgsConstructor;
-
+@RequestMapping(name = "periodos", path = "periodos")
 @Controller
-@AllArgsConstructor
-public class IndexController {
+public class PeriodoController {
 	@Autowired
-	private MenuService service;
+	private MenuService menuService;
 	
 	@Autowired PeriodoService periodoService;
 	
-	@RequestMapping(method=RequestMethod.GET ,name = "")
-	public String index(Model model) {
-		List<Menu> allMenus = this.service.getAllMenus();
-		List<Menu> subMenus = this.service.getSubMenus(allMenus).get(allMenus.get(0).getId());
-		
+	@RequestMapping(method = RequestMethod.GET)
+	public String addNewPeriodo(Model model) {
+		List<Menu> allMenus = this.menuService.getAllMenus();
+		List<Menu> subMenus = this.menuService.getSubMenus(allMenus).get(allMenus.get(0).getId());
 		List<Menu> root = allMenus.stream().filter(t -> !t.getIsSubMenu()).collect(Collectors.toList());
 		
 		List<Periodo> periodos = this.periodoService.getAllPeriodosRegistered();
@@ -36,7 +33,7 @@ public class IndexController {
 		model.addAttribute("periodos", periodos);
 		model.addAttribute("menus", root);
 		model.addAttribute("submenus", subMenus);
-
-		return "index";
+		
+		return "periodos/index.html";
 	}
 }

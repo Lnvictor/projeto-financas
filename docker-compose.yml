@@ -1,0 +1,16 @@
+version: '3.3'
+
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    volumes:
+      - vol_scorp:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+
+volumes:
+  vol_scorp: { }

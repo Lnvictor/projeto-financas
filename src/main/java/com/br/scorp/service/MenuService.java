@@ -33,7 +33,7 @@ public class MenuService {
 		menus.forEach(menu -> {
 			if (menu.getIsSubMenu()) {
 				if (map.containsKey(menu.getIdParentMenu().longValue())) {
-					map.get(menu.getId()).add(menu);
+					map.get(menu.getIdParentMenu().longValue()).add(menu);
 				}
 				else {
 					var l = new ArrayList<Menu>();
