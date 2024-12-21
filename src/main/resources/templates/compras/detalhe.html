@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Scorp</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap"
+	rel="stylesheet">
+
+	<script th:src="@{/index.js}"></script>
+	<link th:href="@{../styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<header th:replace="~{common :: header}"></header>
+	<section th:replace="~{common :: section}"></section>
+
+	<div th:replace="~{common :: compraForm}"></div>
+</body>
+</html>

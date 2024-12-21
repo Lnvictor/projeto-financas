@@ -20,6 +20,7 @@ public class Compra {
 	private String descricao;
 	private String banco;
 	private BigDecimal valor;
+	private Boolean isCompraRecorrente;
 	
 	@ManyToOne
 	@JoinColumn(name = "fatura_id")
@@ -63,6 +64,14 @@ public class Compra {
 
 	public void setFatura(Fatura fatura) {
 		this.fatura = fatura;
+	}
+
+	public Boolean getIsCompraRecorrente() {
+		return isCompraRecorrente;
+	}
+
+	public void setIsCompraRecorrente(Boolean isCompraRecorrente) {
+		this.isCompraRecorrente = isCompraRecorrente;
 	}
 	
 	

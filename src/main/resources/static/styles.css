@@ -29,13 +29,9 @@
 	width: fit-content;
 	padding: 5px;
 	border-radius: 5px;
+	border-color: #1a5e63;
 	text-decoration: none;
 	list-style-type: none;
-}
-
-.nav-item:hover {
-	background: #028090;
-	cursor: pointer;
 }
 
 .white {
@@ -48,6 +44,7 @@
 
 .pink {
 	color: #C64191;
+	text-decoration: none;
 }
 
 
@@ -90,10 +87,14 @@
 	font-size: 16px;
 }
 
+.large-font {
+	font-size: 22px
+}
+
 .main-content{
 	background: #F0F3BD;
 	width: 70%;
-	max-height: 100%;
+	/*max-height: 100%;*/
 	min-height: 300px;
 	position: relative;
 	top: 20%;
@@ -130,3 +131,49 @@
 	background: #fff;
 	cursor: pointer;
 }
+
+
+.add-per-form{
+	width: fit-content;
+	margin: 0 auto;
+	border: solid 1px;
+	border-radius: 15px;
+	border-color: #028090;
+	padding: 10px;
+}
+
+.add-per-form > * {
+	display: block;
+}
+
+.add-per-form > input {
+	width: 150px;
+	padding: 5px;
+	border-radius: 15px;
+	margin-bottom: 15px;
+	margin-top: 5px;
+	border-color: #028090;
+}
+
+.form-btn {
+	padding: 5px;
+	margin: 0 auto;
+	background: #F0F3BD;
+	border: solid 2px;
+	border-color: #028090;
+	border-radius: 15px;
+}
+
+.separator {
+	padding: 5px;
+	border-bottom: solid .5px;
+	border-color: #1a5e63;
+}
+
+.hoverable:hover {
+	background: #028090;
+	color: #fff;
+	cursor: pointer;
+}
+
+

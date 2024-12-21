@@ -1,17 +1,19 @@
 package com.br.scorp.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.br.scorp.entity.Menu;
+import com.br.scorp.entity.Compra;
+import com.br.scorp.entity.Fatura;
 import com.br.scorp.entity.Periodo;
-import com.br.scorp.service.MenuService;
+import com.br.scorp.service.CompraService;
+import com.br.scorp.service.FaturaService;
 import com.br.scorp.service.PeriodoService;
 
 import lombok.AllArgsConstructor;
@@ -20,22 +22,22 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class IndexController {
 	@Autowired
-	private MenuService service;
+	private PeriodoService periodoService;
+	@Autowired
+	private FaturaService faturaService;
+	@Autowired
+	private CompraService compraService;
+
 	
-	@Autowired PeriodoService periodoService;
-	
-	@RequestMapping(method=RequestMethod.GET ,name = "")
-	public String index(Model model) {
-		List<Menu> allMenus = this.service.getAllMenus();
-		List<Menu> subMenus = this.service.getSubMenus(allMenus).get(allMenus.get(0).getId());
+	@RequestMapping(method=RequestMethod.GET, name = "")
+	public String index(Model model, @RequestParam(required = false) String dateSelected) {
+		Periodo periodoSelected = this.periodoService.parsePeriodoSelected(dateSelected);
+		Fatura faturaSelected = this.faturaService.findOrCreateByPeriodo(periodoSelected);
+		List<Compra> compras =this.compraService.getAllComprasFromFatura(faturaSelected);
 		
-		List<Menu> root = allMenus.stream().filter(t -> !t.getIsSubMenu()).collect(Collectors.toList());
-		
-		List<Periodo> periodos = this.periodoService.getAllPeriodosRegistered();
-		
-		model.addAttribute("periodos", periodos);
-		model.addAttribute("menus", root);
-		model.addAttribute("submenus", subMenus);
+		model.addAttribute("fatura", faturaSelected);
+		model.addAttribute("compras", compras);
+		model.addAttribute("dateSelected", periodoSelected.getStartsAt());
 
 		return "index";
 	}

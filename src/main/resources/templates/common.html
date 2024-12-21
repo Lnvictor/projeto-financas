@@ -1,7 +1,10 @@
 <header class="nav-section">
 	<nav class="my-nav">
 		<ul th:each="menu: ${menus}" class="nav-list">
-			<li class="nav-item white oswald-txt" th:text="${menu.getDescription()}"></li>
+			<li class="nav-item white oswald-txt">
+				<a href="/" class="hoverable white oswald-txt" th:text="${menu.getDescription()}">
+				</a>
+			</li>
 		</ul>
 	</nav>
 </header>
@@ -9,8 +12,8 @@
 <section class="sidenav">
 	<nav class="my-sidenav">
 		<ul class="sidenav-list" th:each="sub: ${submenus}">
-			<li class="sidenav-item pink oswald-txt">
-				<a th:text="${sub.getDescription()}" th:href="${sub.getLink()}"> </a>
+			<li class="sidenav-item">
+				<a class="pink oswald-txt" th:text="${sub.getDescription()}" th:href="${sub.getLink()}"> </a>
 			</li>
 		</ul>
 	</nav>
@@ -24,12 +27,26 @@
 <div class="date-picker-container">
 	<h2 class="pink oswald-txt medium-font"> SELECIONE O PERIODO DESEJADO</h2>
 	<br>
-	<select name="date-picker" id="date-picker" class="oswald-txt" th:each="p: ${periodos}">
-		<option th:value="${p.getStartsAt()}" th:text="${p.getStartsAt()}"></option>
+	<select name="date-picker" id="date-picker" class="oswald-txt" onchange="periodoChangeHandler()">
+		<option th:each="p: ${periodos}" th:value="${p.getStartsAt()}" th:text="${p.getStartsAt()}" th:selected="${dateSelected.equals(p.getStartsAt())}">
+		</option>
 	</select>
 </div>
 
 <div class="main-content" th:fragment="fatura">
+	<ul class="nav-list" th:each="compra : ${compras}" th:onclick="'javascript:compraOnclickHandle(' + ${compra.getId()} + ')'">
+		<div class="hoverable separator">
+			<li class="hoverable nav-item oswald-text pink large-font" th:text="${compra.getDescricao()} + '    ---   R$' +${compra.getValor()}"></li>
+		</div>
+	</ul>
+	<br><br>
+	<p class="hoverable nav-item oswald-text pink large-font" th:text="'Total: R$ ' + ${fatura.getValor}">
+		
+	</p>
+	<br>
+	<p class="hoverable nav-item oswald-text pink large-font" th:text="'Livre: R$ ' + ${6300 - fatura.getValor}">
+		
+	</p>
 </div>
 
 
@@ -38,16 +55,44 @@
 </div>
 
 <div class="main-content perFrm" th:fragment="perFrm"> 
-	<form>
-		<label for="inicio">Data de inicio</label>
-		<input id="inicio" name="inicio" type="text">
+	<h2 class="pink oswald-txt medium-font"> Cadastro de Período</h2>
+	
+	<form class="add-per-form" th:action="@{/periodos/add}" method="POST">
+		<label class="oswald-txt pink" for="inicio">Data de inicio</label>
+		<input id="inicio" name="inicio" type="date">
 		
-		<label for="fim">Data de Fim</label>
-		<input id="fim" name="fim" type="text">
+		<label class="oswald-txt pink" for="fim">Data de Fim</label>
+		<input id="fim" name="fim" type="date">
 		
-		<label for="vencimento">Data de Vencimento</label>
-		<input id="vencimento" name="vencimento" type="text">
+		<label class="oswald-txt pink" for="vencimento">Data de Vencimento</label>
+		<input id="vencimento" name="vencimento" type="date">
 		
-		<button type="submit"> Cadastrar </button>
+		<button type="submit" class="hoverable form-btn oswald-txt pink"> Cadastrar </button>
+	</form>
+</div>
+
+<div class="container" th:fragment="compraForm">			
+	<div th:replace="~{common :: compraFrm}"></div>
+</div>
+
+<div class="main-content perFrm" th:fragment="compraFrm"> 
+	<h2 class="pink oswald-txt medium-font"> Cadastro de Compra</h2>
+	
+	<form class="add-per-form" th:action="@{/compras/add}" method="POST">
+		<input type="hidden" id="idCompra" name="idCompra" th:value=${compra?.getId}>
+	
+		<label class="oswald-txt pink" for="banco">Banco</label>
+		<input id="banco" name="banco" type="text" th:value=${compra?.getBanco}>
+		
+		<label class="oswald-txt pink" for="descricao">Descricao</label>
+		<input id="descricao" name="descricao" type="text" th:value=${compra?.getDescricao}>
+		
+		<label class="oswald-txt pink" for="valor">Valor</label>
+		<input id="valor" name="valor" type="number" th:value=${compra?.getValor}>
+
+		<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 60%; margin: 0 auto;">
+				<button type="submit" class="hoverable form-btn oswald-txt pink" th:text="${compra == null ? 'Cadastrar': 'Salvar'}"> </button>
+				<button type="submit" formaction="/compras/delete" formmethod="get" class="hoverable form-btn oswald-txt" th:text="'Deletar'" onclick="javascript:compraDeleteHandle()"></button>
+		</div>		
 	</form>
 </div>
