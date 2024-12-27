@@ -21,7 +21,8 @@
 .nav-list {
 	position: relative;
 	left: 1%;
-	top: 25%;
+	top: 10%;
+	display: inline;
 }
 
 .nav-item {
@@ -30,8 +31,11 @@
 	padding: 5px;
 	border-radius: 5px;
 	border-color: #1a5e63;
-	text-decoration: none;
 	list-style-type: none;
+}
+
+a {	
+	text-decoration: none;
 }
 
 .white {
@@ -109,7 +113,7 @@
 	position: relative;
 	min-width: 12%;
 	top: 40px;
-	left: 2%;
+	left: 1%;
 	float: left;
 	background: #F0F3BD;
 	border-color: #028090;
@@ -161,7 +165,7 @@
 	background: #F0F3BD;
 	border: solid 2px;
 	border-color: #028090;
-	border-radius: 15px;
+	border-radius: 10px;
 }
 
 .separator {
@@ -176,4 +180,20 @@
 	cursor: pointer;
 }
 
+.center {
+	width: fit-content;
+	margin: 0 auto;
+}
 
+.margin-top-10 {
+	margin-top: 10px;
+}
+
+.logo-nav {
+	position:relative;
+	top: 10%;
+	height: 60%;
+	width: 2%;
+	padding: 0;
+	margin: 0;
+}

@@ -7,5 +7,5 @@ import com.br.scorp.entity.Menu;
 
 @Repository
 public interface MenuRepository extends CrudRepository<Menu, Long>{
-	
+	Menu findByLink(String link);
 }

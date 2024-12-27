@@ -1,8 +1,12 @@
 <header class="nav-section">
 	<nav class="my-nav">
-		<ul th:each="menu: ${menus}" class="nav-list">
-			<li class="nav-item white oswald-txt">
-				<a href="/" class="hoverable white oswald-txt" th:text="${menu.getDescription()}">
+		<ul class="nav-list">
+			<a href="/" class="nav-item">
+				<img src="/img/escorpiao.png" alt="" class="logo-nav">
+			</a>
+
+			<li th:each="menu: ${menus}" class="hoverable nav-item white oswald-txt">
+				<a th:href="${menu.getLink()}" class="hoverable white oswald-txt" th:text="${menu.getDescription()}">
 				</a>
 			</li>
 		</ul>
@@ -11,8 +15,8 @@
 
 <section class="sidenav">
 	<nav class="my-sidenav">
-		<ul class="sidenav-list" th:each="sub: ${submenus}">
-			<li class="sidenav-item">
+		<ul class="sidenav-list">
+			<li class="sidenav-item" th:each="sub: ${submenus}">
 				<a class="pink oswald-txt" th:text="${sub.getDescription()}" th:href="${sub.getLink()}"> </a>
 			</li>
 		</ul>

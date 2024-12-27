@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Scorp</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="/img/escorpiao.png" type="image/x-icon">
+	<script th:src="@{/index.js}"></script>
+	<link th:href="@{../styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<header th:replace="~{common :: header}"></header>
+	<br>
+
+	<div class="date-picker-container">
+		<p class="nav-item oswald-txt pink large-font">Resultados da Simulação</p>
+	</div>
+
+	<br>
+
+	<div class="main-content">
+		<p class="oswald-txt pink large-font">Mínimo</p>
+		<p class="oswald-txt medium-font" th:text="${result.getFormattedMinimo()}"></p>
+		<br>
+		<p class="oswald-txt pink large-font">Máximo</p>
+		<p class="oswald-txt medium-font" th:text="${result.getFormattedMaximo()}"></p>
+		<br>
+		<p class="oswald-txt pink large-font">Total guardando o Mínimo: </p>
+		<p class="oswald-txt medium-font" th:text="${result.getFormattedQtdMinima()}"></p>
+		<br>
+		<p class="oswald-txt pink large-font">Total guardando o Maximo</p>
+		<p class="oswald-txt medium-font" th:text="${result.getFormattedQtdMaxima()}"></p>
+	</div>
+
+	<br>
+	<div class="date-picker-container">
+		<p class="oswald-txt pink medium-font">
+
+			Deseja apagar a simulação e recomeçar?
+		</p>
+		<br>
+		<button class="hoverable form-btn oswald-txt pink medium-font" th:onclick="javascript:zerarSimulacao()">
+			Sim
+		</button>
+	</div>
+</body>
+
+</html>

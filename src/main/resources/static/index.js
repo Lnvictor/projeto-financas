@@ -13,3 +13,11 @@ function compraDeleteHandle() {
 		document.forms.deleteForm.submit();	
 	}, 10000);
 }
+
+function criaSimulacaoDoZero() {
+	window.location = '/simula/addFakePost';
+}
+
+function zerarSimulacao() {
+	window.location = '/simula/zerar';
+}

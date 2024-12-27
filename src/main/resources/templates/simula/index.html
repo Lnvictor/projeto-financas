@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Scorp</title>
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="/img/escorpiao.png" type="image/x-icon">
+	<script th:src="@{/index.js}"></script>
+	<link th:href="@{styles.css}" rel="stylesheet" />
+</head>
+
+<body>
+	<header th:replace="~{common :: header}"></header>
+	<br>
+	
+	<div class="date-picker-container">
+		<ul class="nav-list">
+			<li class="nav-item" th:each="e: ${etapas}">
+				<p class="nav-item oswald-txt pink medium-font" th:text="${e}" th:if="${e == etapaAtual}"></p>
+				<p class="nav-item oswald-txt medium-font" th:text="${e}" th:if="${e != etapaAtual}"></p>
+				<svg th:if="${!e.equals('QUANTIDADE_NECESSARIA')}" fill="#1a5e63" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 248.322 248.322" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M124.161,248.322c68.571,0,124.161-55.59,124.161-124.161C248.322,55.589,192.732,0,124.161,0C55.589,0,0,55.589,0,124.161 C0,192.732,55.589,248.322,124.161,248.322z M70.443,52.237l28.285-28.284l99.702,99.702l-99.702,99.702l-28.285-28.284 l71.418-71.417L70.443,52.237z"></path> </g> </g></svg>
+			</li>
+		</ul>
+	</div>
+
+	<br>
+
+	<div class="main-content">
+		<div th:if="${simulacaoInexistente}" class="center">
+			<p class="oswald-txt pink medium-font">Deseja Iniciar uma nova Simulação?</p>
+			<br>
+			<button class="hoverable form-btn oswald-txt pink medium-font" th:onclick="javascript:criaSimulacaoDoZero()">SIM</button>
+			
+		</div>
+
+		<form class="add-per-form" th:action="@{/simula/add}" method="POST" th:if="${!simulacaoInexistente}">
+			<input type="hidden" id="id" name="id" th:value="${idSimula}">
+			<input type="hidden" id="etapa" name="etapa" th:value="${etapaAtual}">
+			
+			<label class="oswald-txt pink" th:for="${campo}" th:text="${campo.toUpperCase()}"></label>
+			<input th:id="${campo}" th:name="${campo}" type="text"> 
+
+			<button class="hoverable form-btn oswald-txt pink medium-font" type="submit">
+				<svg fill="#1a5e63" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 248.322 248.322" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M124.161,248.322c68.571,0,124.161-55.59,124.161-124.161C248.322,55.589,192.732,0,124.161,0C55.589,0,0,55.589,0,124.161 C0,192.732,55.589,248.322,124.161,248.322z M70.443,52.237l28.285-28.284l99.702,99.702l-99.702,99.702l-28.285-28.284 l71.418-71.417L70.443,52.237z"></path> </g> </g></svg>
+				SALVAR
+			</button>
+
+			<div class="center margin-top-10">
+				<button type="submit" 
+				formaction="/simula/process"
+				formmethod="get"
+				th:if="${etapaAtual.equals('QUANTIDADE_NECESSARIA')}" class="hoverable form-btn oswald-txt pink medium-font">
+					PROCESSAR SIMULACAO
+				</button>
+			</div>
+		</form>
+		
+	</div>
+
+</body>
+
+</html>
