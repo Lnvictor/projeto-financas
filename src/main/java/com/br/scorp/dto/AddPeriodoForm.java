@@ -6,6 +6,15 @@ public class AddPeriodoForm {
 	public LocalDate inicio;
 	public LocalDate fim;
 	public LocalDate vencimento;
+	public Boolean recorrencia;
+
+	public Boolean getRecorrencia() {
+		return recorrencia;
+	}
+
+	public void setRecorrencia(Boolean recorrencia) {
+		this.recorrencia = recorrencia;
+	}
 
 	public LocalDate getInicio() {
 		return inicio;

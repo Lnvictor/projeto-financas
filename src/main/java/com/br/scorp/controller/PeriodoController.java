@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.br.scorp.dto.AddPeriodoForm;
+import com.br.scorp.entity.Periodo;
+import com.br.scorp.service.CompraService;
 import com.br.scorp.service.PeriodoService;
 
 @RequestMapping(name = "periodos", path = "periodos")
@@ -15,6 +17,9 @@ public class PeriodoController {
 	@Autowired
 	PeriodoService periodoService;
 
+	@Autowired
+	CompraService compraService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String addNewPeriodo(Model model) {
 		return "periodos/index.html";
@@ -22,7 +27,11 @@ public class PeriodoController {
 
 	@RequestMapping(method = RequestMethod.POST, path = "/add")
 	public String addNewPeriodoFormHandler(AddPeriodoForm form) {
-		periodoService.addPeriodo(form);
+		Periodo periodo = periodoService.addPeriodo(form);
+
+		if (form.getRecorrencia()) {
+			compraService.salvarComprasRecorrentesNoPeriodo(periodo.getId());
+		}
 
 		return "redirect:/";
 	}

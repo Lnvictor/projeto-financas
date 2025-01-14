@@ -22,7 +22,6 @@ public class CompraService {
 	private FaturaService faturaService;
 
 	public void criaOuAtualizaCompra(AddNewCompraForm form) {
-
 		Compra compra;
 
 		if (form.getIdCompra() != null && !form.getIdCompra().isEmpty()) {
@@ -40,11 +39,23 @@ public class CompraService {
 		compra.setValor(form.getValor());
 
 		Periodo periodo = this.periodoService.getMostRecentPeriodo();
-		Fatura fatura = this.faturaService.findOrCreateByPeriodo(periodo);
-		compra.setFatura(fatura);
+		Fatura fatura = this.faturaService.findOrCreateByPeriodo(periodo).getFatura();
+
+		if (form.getRecorrente().equals("on")) {
+			try {
+				Compra compraDaFatura = (Compra) compra.clone();
+				compra.setIsCompraRecorrente(true);
+				compraDaFatura.setIsCompraRecorrente(false);
+				compraDaFatura.setFatura(fatura);
+				this.repository.save(compraDaFatura);
+			} catch (CloneNotSupportedException e) {
+				throw new RuntimeException();
+			}
+		} else {
+			compra.setFatura(fatura);
+		}
 
 		this.faturaService.updateFaturaValue(fatura, compra);
-
 		this.repository.save(compra);
 	}
 
@@ -66,6 +77,27 @@ public class CompraService {
 		this.repository.save(compra);
 	}
 
+	public List<Compra> getComprasRecorrentes() {
+		List<Compra> comprasRecorrentes = this.repository.findByIsCompraRecorrente(true);
+
+		return comprasRecorrentes;
+	}
+
+	public void salvarComprasRecorrentesNoPeriodo(Long periodoId) {
+		List<Compra> comprasRecorrentes = this.getComprasRecorrentes();
+
+		comprasRecorrentes.forEach(
+				compra -> {
+					AddNewCompraForm addNewCompraForm = new AddNewCompraForm();
+					addNewCompraForm.setBanco(compra.getBanco());
+					addNewCompraForm.setDescricao(compra.getDescricao());
+					addNewCompraForm.setRecorrente("off");
+					addNewCompraForm.setValor(compra.getValor());
+
+					this.criaOuAtualizaCompra(addNewCompraForm);
+				});
+	}
+
 	public List<Compra> getComprasForPeriodo(Periodo periodo) {
 		return null;
 	}
@@ -84,11 +116,11 @@ public class CompraService {
 		Compra compra = this.getCompra(Long.valueOf(form.getIdCompra()));
 		Fatura faturaDaCompra = compra.getFatura();
 		BigDecimal inversor = new BigDecimal(-1);
-		
+
 		if (faturaDaCompra != null) {
 			this.faturaService.updateFaturaValue(faturaDaCompra, compra.getValor().multiply(inversor));
 		}
-		
+
 		this.repository.delete(compra);
 	}
 }

@@ -28,7 +28,7 @@
 	<div th:replace="~{common :: fatura}"></div>
 </div>
 
-<div class="date-picker-container">
+<div class="date-picker-container top-10 w-70p h-50p">
 	<h2 class="pink oswald-txt medium-font"> SELECIONE O PERIODO DESEJADO</h2>
 	<br>
 	<select name="date-picker" id="date-picker" class="oswald-txt" onchange="periodoChangeHandler()">
@@ -40,15 +40,23 @@
 <div class="main-content" th:fragment="fatura">
 	<ul class="nav-list" th:each="compra : ${compras}" th:onclick="'javascript:compraOnclickHandle(' + ${compra.getId()} + ')'">
 		<div class="hoverable separator">
-			<li class="hoverable nav-item oswald-text pink large-font" th:text="${compra.getDescricao()} + '    ---   R$' +${compra.getValor()}"></li>
+			<li class="hoverable nav-item oswald-txt medium-font">
+				<text th:text="${compra.getDescricao()}">
+
+				</text>
+
+				<text class="hoverable pink" th:text="${'--- R$ ' + compra.getValor()}">
+
+				</text>
+			</li>
 		</div>
 	</ul>
 	<br><br>
-	<p class="hoverable nav-item oswald-text pink large-font" th:text="'Total: R$ ' + ${fatura.getValor}">
+	<p class="hoverable nav-item oswald-txt pink large-font" th:text="'Total: R$ ' + ${fatura.getValor}">
 		
 	</p>
 	<br>
-	<p class="hoverable nav-item oswald-text pink large-font" th:text="'Livre: R$ ' + ${6300 - fatura.getValor}">
+	<p class="hoverable nav-item oswald-txt pink large-font" th:text="'Livre: R$ ' + ${6300 - fatura.getValor}">
 		
 	</p>
 </div>
@@ -71,6 +79,9 @@
 		<label class="oswald-txt pink" for="vencimento">Data de Vencimento</label>
 		<input id="vencimento" name="vencimento" type="date">
 		
+		<label class="oswald-txt pink" for="recorrencia">Incuir Recorrencia</label>
+		<input id="recorrencia" name="recorrencia" type="checkbox">
+
 		<button type="submit" class="hoverable form-btn oswald-txt pink"> Cadastrar </button>
 	</form>
 </div>
@@ -93,6 +104,9 @@
 		
 		<label class="oswald-txt pink" for="valor">Valor</label>
 		<input id="valor" name="valor" type="number" th:value=${compra?.getValor}>
+
+		<label class="oswald-txt pink" for="recorrencia">Incuir Recorrencia</label>
+		<input id="recorrente" name="recorrente" type="checkbox">
 
 		<div style="display: flex; flex-direction: row; justify-content: space-evenly; width: 60%; margin: 0 auto;">
 				<button type="submit" class="hoverable form-btn oswald-txt pink" th:text="${compra == null ? 'Cadastrar': 'Salvar'}"> </button>

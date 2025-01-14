@@ -38,26 +38,6 @@ a {
 	text-decoration: none;
 }
 
-.white {
-	color: #fff;
-}
-
-.black {
-	color: #00BFB2;
-}
-
-.pink {
-	color: #C64191;
-	text-decoration: none;
-}
-
-
-.oswald-txt {
-  font-family: "Oswald", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-}
-
 .container {
 	width: 90%;
 	height: 150px;
@@ -68,15 +48,11 @@ a {
 }
 
 .date-picker-container {
-	width: 70%;
-	height: 50%;
-/*	background: green; */
-	position: relative;
+	/*	background: green; */
 	border-color: #028090;
 	border-style: solid;
 	border-radius: 5px;
 	padding: 15px;
-	top: 10%;
 	margin: 0 auto;
 	background: #F0F3BD;
 }
@@ -87,13 +63,6 @@ a {
 	border-radius: 5px;
 }
 
-.medium-font {
-	font-size: 16px;
-}
-
-.large-font {
-	font-size: 22px
-}
 
 .main-content{
 	background: #F0F3BD;
@@ -175,10 +144,12 @@ a {
 }
 
 .hoverable:hover {
-	background: #028090;
+	background: rgb(28, 173, 193);
 	color: #fff;
 	cursor: pointer;
 }
+
+/* Posicionamento */
 
 .center {
 	width: fit-content;
@@ -196,4 +167,56 @@ a {
 	width: 2%;
 	padding: 0;
 	margin: 0;
+}
+
+.bottom-40{
+	position:absolute;
+	bottom: 40%;
+}
+
+.h-50p {
+	height: 50%;
+}
+
+.w-70p {
+	width: 70%;
+}
+
+.top-10 {
+	position: relative;
+	top: 10%;
+}
+
+/* Cores */
+
+.medium-font {
+	font-size: 18px;
+}
+
+.large-font {
+	font-size: 22px
+}
+
+.white {
+	color: #fff;
+}
+
+.black {
+	color: #00BFB2;
+}
+
+.pink {
+	color: #C64191;
+	text-decoration: none;
+}
+
+.red {
+	color: red;
+	text-decoration: none;
+}
+
+.oswald-txt {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }

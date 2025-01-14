@@ -30,7 +30,7 @@ public class PeriodoService {
 		periodo.setStartsAt(form.getInicio());
 		periodo.setEndsAt(form.getFim());
 		periodo.setDueDate(form.getVencimento());
-		
+
 		this.repo.save(periodo);
 		
 		return periodo;

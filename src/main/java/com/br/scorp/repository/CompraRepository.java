@@ -11,4 +11,6 @@ import com.br.scorp.entity.Fatura;
 @Repository
 public interface CompraRepository extends CrudRepository<Compra, Long>{
 	List<Compra> findByFatura(Fatura fatura);
+
+	List<Compra> findByIsCompraRecorrente(Boolean isCompraRecorrente);
 }

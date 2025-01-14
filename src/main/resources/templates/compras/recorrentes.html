@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Scorp</title>
+		
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+		<link rel="shortcut icon" href="/img/escorpiao.png" type="image/x-icon">
+		<script th:src="@{/index.js}"></script>
+		<link th:href="@{/styles.css}" rel="stylesheet"/>
+	</head>
+	
+	<body>
+		<header th:replace="~{common :: header}" ></header>
+		<section th:replace="~{common :: section}" ></section>
+
+		<div class="container">
+            <div class="date-picker-container top-10 w-70p">
+                <h1 class="oswald-txt large-font pink">
+                    Compras Recorrentes
+                </h1>
+            </div>
+            <div class="main-content">
+                <ul class="nav-list" th:each="compra : ${compras}" th:onclick="'javascript:compraOnclickHandle(' + ${compra.getId()} + ')'">
+                    <div class="hoverable separator">
+                        <li class="hoverable nav-item oswald-txt medium-font">
+                            <text th:text="${compra.getDescricao()}">
+            
+                            </text>
+            
+                            <text class="hoverable pink" th:text="${'--- R$ ' + compra.getValor()}">
+            
+                            </text>
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        </div>
+	</body>
+</html>

@@ -12,16 +12,16 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "compras")
-public class Compra {
+public class Compra implements Cloneable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String descricao;
 	private String banco;
 	private BigDecimal valor;
 	private Boolean isCompraRecorrente;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "fatura_id")
 	private Fatura fatura;
@@ -73,6 +73,10 @@ public class Compra {
 	public void setIsCompraRecorrente(Boolean isCompraRecorrente) {
 		this.isCompraRecorrente = isCompraRecorrente;
 	}
-	
-	
+
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		return super.clone();
+	}
+
 }

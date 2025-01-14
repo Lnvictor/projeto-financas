@@ -17,5 +17,10 @@
 		
 		<div th:replace="~{common :: container}">
 		</div>
+		
+		<div class="date-picker-container bottom-40" th:if="${warning != null}">
+			<p class="oswald-txt medium-font red" th:text="${warning}">
+			</p>
+		</div>
 	</body>
 </html>

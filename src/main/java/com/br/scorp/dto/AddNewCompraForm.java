@@ -8,6 +8,15 @@ public class AddNewCompraForm {
 	public String descricao;
 	public BigDecimal valor;
 	public String fatura;
+	public String recorrente;
+
+	public String getRecorrente() {
+		return recorrente;
+	}
+
+	public void setRecorrente(String recorrente) {
+		this.recorrente = recorrente;
+	}
 
 	public String getBanco() {
 		return banco;

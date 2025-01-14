@@ -1,5 +1,7 @@
 package com.br.scorp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import com.br.scorp.dto.AddNewCompraForm;
 import com.br.scorp.entity.Compra;
 import com.br.scorp.service.CompraService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Controller
 @RequestMapping(path = "compras")
 public class CompraController {
@@ -20,6 +24,14 @@ public class CompraController {
 	@RequestMapping
 	public String addNewCompra(Model model) {
 		return "compras/index";
+	}
+
+	@RequestMapping(path = "recorrentes", method = RequestMethod.GET)
+	public String getRecorrentes(Model model) {
+		List<Compra> comprasRecorrentes = this.compraService.getComprasRecorrentes();
+		model.addAttribute("compras", comprasRecorrentes);
+
+		return "compras/recorrentes";
 	}
 
 	@RequestMapping(method = RequestMethod.GET, path = "delete")
@@ -39,7 +51,7 @@ public class CompraController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "add")
-	public String addNewCompraFormHander(AddNewCompraForm form) {
+	public String addNewCompraFormHander(HttpServletRequest request, AddNewCompraForm form) {
 		this.compraService.criaOuAtualizaCompra(form);
 
 		return "redirect:/";

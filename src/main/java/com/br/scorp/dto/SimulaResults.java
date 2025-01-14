@@ -5,10 +5,10 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 public class SimulaResults {
-    BigDecimal minimo;
-    BigDecimal maximo;
-    BigDecimal qtdMinima;
-    BigDecimal qtdMaxima;
+    private BigDecimal minimo;
+    private BigDecimal maximo;
+    private BigDecimal qtdMinima;
+    private BigDecimal qtdMaxima;
 
     public SimulaResults(BigDecimal minimo, BigDecimal maximo, BigDecimal qtdMinima, BigDecimal qtdMaxima) {
         this.minimo = minimo;

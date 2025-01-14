@@ -16,7 +16,7 @@
 	<header th:replace="~{common :: header}"></header>
 	<br>
 	
-	<div class="date-picker-container">
+	<div class="date-picker-container top-10 w-70p h-50p">
 		<ul class="nav-list">
 			<li class="nav-item" th:each="e: ${etapas}">
 				<p class="nav-item oswald-txt pink medium-font" th:text="${e}" th:if="${e == etapaAtual}"></p>
